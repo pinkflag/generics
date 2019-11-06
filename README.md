@@ -1,14 +1,14 @@
 # The Generics (Stripe)
 
-Band store front that makes bank through the super-cool **Stripe API**!
+Store front for a band that makes bank through the super-cool **Stripe API**!
 
 Hosted at: https://generics.herokuapp.com
 
-## Run the app locally
+## Running the app locally
 
-1. install Node Package Manager (NPM) by installing Node.js
+1. Install Node Package Manager (NPM) by installing Node.js
 
-2. from the console move inside the project folder and run
+2. From the terminal go to the project folder and run
 
 ```
 npm install
@@ -21,15 +21,13 @@ STRIPE_SECRET_KEY=<Stripe secret key>
 STRIPE_PUBLIC_KEY=<Stripe Public key>
 ```
 
-4. run the following command to start the app
+4. Run the following command to start the app
 
 ```
 npm start
 ```
 
 5. in the browser type localhost:3000
-
-Enjoy!
 
 # Synopsis
 
@@ -47,7 +45,10 @@ To that end,
 
 2. Found a basic template for a store front online.
 
-3. Integrated required Stripe APIs in the right places to demonstrate the end-to-end payments workflow.
+3. Integrated required Stripe APIs in the right places to enable an end-to-end payments workflow:
+* index.js: [49](https://github.com/pinkflag/generics/blob/b2c254950159b6483a67293ec4f96711556c2e3b/public/index.js#L49), [83](https://github.com/pinkflag/generics/blob/b2c254950159b6483a67293ec4f96711556c2e3b/public/index.js#L83)
+* index.ejs: [8](https://github.com/pinkflag/generics/blob/b2c254950159b6483a67293ec4f96711556c2e3b/views/index.ejs#L8)
+* server.js: [50](https://github.com/pinkflag/generics/blob/b2c254950159b6483a67293ec4f96711556c2e3b/server.js#L50)
 
 4. Hosted the demo on [Heroku](https://generics.herokuapp.com)
 
