@@ -4,6 +4,8 @@ Store front for the band ***Generics*** that makes bank through the super-cool *
 
 Hosted at: https://generics.herokuapp.com
 
+Stripe test card numbers: https://stripe.com/docs/testing#cards
+
 ## Running the app locally
 
 1. Install Node Package Manager (NPM) by installing Node.js
