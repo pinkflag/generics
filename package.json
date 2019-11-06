@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pinkflag/payments.git"
+    "url": "https://github.com/pinkflag/generics.git"
   },
   "keywords": [
     "stripe",
@@ -17,9 +17,9 @@
   "author": "Karthik Nagarajan",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pinkflag/payments/issues"
+    "url": "https://github.com/pinkflag/generics/issues"
   },
-  "homepage": "https://github.com/pinkflag/payments#readme",
+  "homepage": "https://github.com/pinkflag/generics#readme",
   "dependencies": {
     "ejs": "^2.7.1",
     "express": "^4.17.1",
