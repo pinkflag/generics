@@ -8,6 +8,7 @@ const stripePublicKey = process.env.STRIPE_PUBLIC_KEY
 
 const express = require('express')
 const app = express()
+const port = process.env.PORT || 3000
 const fs = require("fs")
 const stripe = require('stripe')(stripeSecretKey)
 
@@ -67,4 +68,6 @@ app.get('/about', function (req, res) {
     res.render('about.ejs')
 })
 
-app.listen(3000)
+app.listen(port, function () {
+    console.log(`Server running at port ${port}`)
+})
