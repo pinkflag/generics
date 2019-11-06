@@ -1,0 +1,32 @@
+{
+  "name": "payments",
+  "version": "1.0.0",
+  "description": "Setup payments through Stripe",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pinkflag/payments.git"
+  },
+  "keywords": [
+    "stripe",
+    "payments"
+  ],
+  "author": "Karthik Nagarajan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pinkflag/payments/issues"
+  },
+  "homepage": "https://github.com/pinkflag/payments#readme",
+  "dependencies": {
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "stripe": "^7.11.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "eslint": "^6.6.0"
+  }
+}
