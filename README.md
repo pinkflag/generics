@@ -1,6 +1,6 @@
 # The Generics (Stripe)
 
-Store front for a band that makes bank through the super-cool **Stripe API**!
+Store front for the band ***Generics*** that makes bank through the super-cool **Stripe API**!
 
 Hosted at: https://generics.herokuapp.com
 
