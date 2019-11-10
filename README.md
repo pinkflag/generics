@@ -1,8 +1,10 @@
 # The Generics (Stripe)
 
-Store front for a band that makes bank through the super-cool **Stripe API**!
+Store front for the band ***Generics*** that makes bank through the super-cool **Stripe API**!
 
 Hosted at: https://generics.herokuapp.com
+
+Stripe test card numbers: https://stripe.com/docs/testing#cards
 
 ## Running the app locally
 
@@ -55,8 +57,8 @@ To that end,
 ## Technology stack
 * [Express](https://expressjs.com) for the server
 * [EJS](https://ejs.co) for client-side views
-* [Github](https://github.com/pinkflag/generics) for source control
-* [Heroku](https://generics.herokuapp.com) for hosting
+* [Github](https://www.github.com) for source control
+* [Heroku](https://www.heroku.com) for hosting
 
 While I'm quite comfortable with these technologies, the reason I picked them is they work well together as part of an ecosystem to deliver value. [Agile Manifesto #10](https://agilemanifesto.org/principles.html) comes to mind:
 ```
@@ -64,6 +66,6 @@ Simplicity - the art of maximizing the amount of work not done - is essential
 ```
 ## Building Robustness
 While the app demonstrates the value proposition, if I had to broaden the immediate scope:
-1. I'd rewrite the HTML/JQuery front-end template in a component based technology like React or Angular to enhance responsiveness and maintainability.
+1. I'd rewrite the HTML/JQuery front-end template in a component based technology like [React](https://reactjs.org) or [Angular](https://angular.io) to enhance responsiveness and maintainability.
 2. Separate the Stripe code into modules and add unit tests (in [Jest](https://jestjs.io/) or [Mocha](https://github.com/mochajs/mocha), maybe use [Sinon.JS](https://sinonjs.org) for fakes). This could also have value as documentation for unit testing with Node.js + Stripe API integration.
 3. Move the data to a DB, as opposed to having it come from [items.json](https://github.com/pinkflag/generics/blob/master/items.json). The DB could be built out to serve as a central store for other apps demoing E-commerce use cases.
