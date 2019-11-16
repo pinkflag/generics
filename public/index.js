@@ -74,10 +74,9 @@ const stripeHandler = StripeCheckout.configure({
                 var price = cartRow.getElementsByClassName('cart-price')[0].innerText
                 // Send data to segment
                 analytics.track("Purchased", {
-                    id: id,
-                    item: title,
-                    price: price,
-                    type: type
+                    category: type,
+                    label: title,
+                    value: price
                 });
                 cartItems.removeChild(cartItems.firstChild)
             }
@@ -123,10 +122,9 @@ function addToCartClicked(event) {
     addItemToCart(title, price, imageSrc, id, type)
     // Send data to segment
     analytics.track("Added to cart", {
-        id: id,
-        item: title,
-        price: price,
-        type: type
+        category: type,
+        label: title,
+        value: price
     });
     updateCartTotal()
 }
