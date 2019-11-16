@@ -67,9 +67,22 @@ const stripeHandler = StripeCheckout.configure({
             // clear cart since the purchase went through
             var cartItems = document.getElementsByClassName('cart-items')[0]
             while (cartItems.hasChildNodes()) {
+                var cartRow = cartItems.firstElementChild
+                var id = cartRow.dataset.itemId;
+                var type = cartRow.dataset.itemType;
+                var title = cartRow.getElementsByClassName('cart-item-title')[0].innerText
+                var price = cartRow.getElementsByClassName('cart-price')[0].innerText
+                // Send data to segment
+                analytics.track("Purchased", {
+                    id: id,
+                    item: title,
+                    price: price,
+                    type: type
+                });
                 cartItems.removeChild(cartItems.firstChild)
             }
             updateCartTotal()
+
         }).catch(function (error) {
             console.error(error)
         })
@@ -106,14 +119,23 @@ function addToCartClicked(event) {
     var price = shopItem.getElementsByClassName('shop-item-price')[0].innerText
     var imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src
     var id = shopItem.dataset.itemId
-    addItemToCart(title, price, imageSrc, id)
+    var type = shopItem.dataset.itemType
+    addItemToCart(title, price, imageSrc, id, type)
+    // Send data to segment
+    analytics.track("Added to cart", {
+        id: id,
+        item: title,
+        price: price,
+        type: type
+    });
     updateCartTotal()
 }
 
-function addItemToCart(title, price, imageSrc, id) {
+function addItemToCart(title, price, imageSrc, id, type) {
     var cartRow = document.createElement('div')
     cartRow.classList.add('cart-row')
     cartRow.dataset.itemId = id
+    cartRow.dataset.itemType = type
     var cartItems = document.getElementsByClassName('cart-items')[0]
     var cartItemNames = cartItems.getElementsByClassName('cart-item-title')
     for (var i = 0; i < cartItemNames.length; i++) {

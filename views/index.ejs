@@ -40,7 +40,7 @@
         <h2 class="section-header">MUSIC</h2>
         <div class="shop-items">
             <% items.music.forEach(function(item) { %>
-            <div class="shop-item" data-item-id="<%= item.id %>">
+            <div class="shop-item" data-item-id="<%= item.id %>" data-item-type="Music">
                 <span class="shop-item-title"><%= item.name %></span>
                 <img class="shop-item-image" src="Images/<%= item.imgName %>">
                 <div class="shop-item-details">
@@ -55,7 +55,7 @@
         <h2 class="section-header">MERCH</h2>
         <div class="shop-items">
             <% items.merch.forEach(function(item) { %>
-            <div class="shop-item" data-item-id="<%= item.id %>">
+            <div class="shop-item" data-item-id="<%= item.id %>" data-item-type="Merch">
                 <span class="shop-item-title"><%= item.name %></span>
                 <img class="shop-item-image" src="Images/<%= item.imgName %>">
                 <div class="shop-item-details">
