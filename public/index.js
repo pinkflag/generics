@@ -43,6 +43,10 @@ function getCartItems() {
     return items;
 }
 
+function convertToCents(dollarString) {
+    return parseFloat(dollarString.replace('$', '')) * 100
+}
+
 
 // Stripe Payments Checkout Handler.
 
@@ -71,7 +75,7 @@ const stripeHandler = StripeCheckout.configure({
                 var id = cartRow.dataset.itemId;
                 var type = cartRow.dataset.itemType;
                 var title = cartRow.getElementsByClassName('cart-item-title')[0].innerText
-                var price = cartRow.getElementsByClassName('cart-price')[0].innerText
+                var price = convertToCents(cartRow.getElementsByClassName('cart-price')[0].innerText)
                 // Send data to segment
                 analytics.track("Purchased", {
                     category: type,
@@ -90,7 +94,7 @@ const stripeHandler = StripeCheckout.configure({
 
 function purchaseClicked() {
     var priceElement = document.getElementsByClassName('cart-total-price')[0]
-    var price = parseFloat(priceElement.innerText.replace('$', '')) * 100
+    var price = convertToCents(priceElement.innerText)
     // Open the Stripe checkout element
     stripeHandler.open({
         amount: price
@@ -124,7 +128,7 @@ function addToCartClicked(event) {
     analytics.track("Added to cart", {
         category: type,
         label: title,
-        value: price
+        value: convertToCents(price)
     });
     updateCartTotal()
 }
