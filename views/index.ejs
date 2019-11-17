@@ -15,7 +15,8 @@
     <title>The Generics | Store</title>
     <meta name="description" content="This is the description">
     <link rel="stylesheet" href="styles.css" />
-    <script src="//checkout.stripe.com/checkout.js" defer></script>
+    <!-- <script src="//checkout.stripe.com/checkout.js" defer></script> -->
+    <script src="//js.stripe.com/v3"></script>
     <script>
         var stripePublicKey = '<%= stripePublicKey %>'
     </script>
@@ -35,10 +36,10 @@
     <section class="container content-section">
         <h2 class="section-header">MUSIC</h2>
         <div class="shop-items">
-            <% items.music.forEach(function(item) { %>
-            <div class="shop-item" data-item-id="<%= item.id %>" data-item-type="Music">
+            <% items.filter(i => i.type === "Music").forEach(function(item) { %>
+            <div class="shop-item" data-item-id="<%= item.id %>" data-item-type="<%= item.id %>">
                 <span class="shop-item-title"><%= item.name %></span>
-                <img class="shop-item-image" src="Images/<%= item.imgName %>">
+                <img class="shop-item-image" src="<%= item.imgName %>">
                 <div class="shop-item-details">
                     <span class="shop-item-price">$<%= item.price / 100 %></span>
                     <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
@@ -50,10 +51,10 @@
     <section class="container content-section">
         <h2 class="section-header">MERCH</h2>
         <div class="shop-items">
-            <% items.merch.forEach(function(item) { %>
+            <% items.filter(i => i.type === "Merchandise").forEach(function(item) { %>
             <div class="shop-item" data-item-id="<%= item.id %>" data-item-type="Merch">
                 <span class="shop-item-title"><%= item.name %></span>
-                <img class="shop-item-image" src="Images/<%= item.imgName %>">
+                <img class="shop-item-image" src="<%= item.imgName %>">
                 <div class="shop-item-details">
                     <span class="shop-item-price">$<%= item.price / 100 %></span>
                     <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
@@ -76,7 +77,7 @@
             <strong class="cart-total-title">Total</strong>
             <span class="cart-total-price">$0</span>
         </div>
-        <button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
+        <button id="checkout-button" class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
     </section>
     <footer class="main-footer">
         <div class="container main-footer-container">
