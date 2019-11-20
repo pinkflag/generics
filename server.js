@@ -31,8 +31,8 @@ app.get('/', function (req, res) {
     })
 })
 
-app.post('/purchase', function (req, res) {
-    fs.readFile('items.json', function (error, data) {
+app.post('/purchase', async function (req, res) {
+    fs.readFile('items.json', async function (error, data) {
         if (error) {
             res.status(500).end()
         }
@@ -46,20 +46,14 @@ app.post('/purchase', function (req, res) {
                 })
                 total = total + itemJson.price * item.quantity
             })
+            
+            const paymentIntent = await stripe.paymentIntents.create({
+                amount: total,
+                currency: 'usd',
+                payment_method_types: ['card']
+            })
 
-            // Create the Stripe charge and send back the amount & Id to user
-            stripe.charges.create(
-                {
-                    amount: total,
-                    source: req.body.stripeTokenId,
-                    currency: 'usd'
-                },
-                function (err, charge) {
-                    // asynchronously called
-                    const totalCharges = (charge.amount / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
-                    res.json({ message: `Total charges: ${totalCharges}, ID: ${charge.id}` })
-                }
-            );
+            res.json({ secret: paymentIntent.client_secret })
         }
     })
 })

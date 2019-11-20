@@ -22,7 +22,7 @@ function ready() {
         var button = addToCartButtons[i]
         button.addEventListener('click', addToCartClicked)
     }
-
+    card.mount("#card-element");
     document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
 }
 
@@ -47,57 +47,42 @@ function convertToCents(dollarString) {
     return parseFloat(dollarString.replace('$', '')) * 100
 }
 
-
 // Stripe Payments Checkout Handler.
-
-const stripeHandler = StripeCheckout.configure({
-    key: stripePublicKey,
-    locale: 'en',
-    token: function (token) {
-        fetch('/purchase', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                stripeTokenId: token.id,
-                items: getCartItems()
-            })
-        }).then(function (res) {
-            return res.json()
-        }).then(function (data) {
-            alert(data.message)
-            // clear cart since the purchase went through
-            var cartItems = document.getElementsByClassName('cart-items')[0]
-            while (cartItems.hasChildNodes()) {
-                var cartRow = cartItems.firstElementChild
-                var id = cartRow.dataset.itemId;
-                var type = cartRow.dataset.itemType;
-                var title = cartRow.getElementsByClassName('cart-item-title')[0].innerText
-                var price = convertToCents(cartRow.getElementsByClassName('cart-price')[0].innerText)
-                // Send data to segment
-                analytics.track("Purchased", {
-                    category: type,
-                    label: title,
-                    value: price
-                });
-                cartItems.removeChild(cartItems.firstChild)
-            }
-            updateCartTotal()
-
-        }).catch(function (error) {
-            console.error(error)
-        })
-    }
-})
 
 function purchaseClicked() {
     var priceElement = document.getElementsByClassName('cart-total-price')[0]
-    var price = convertToCents(priceElement.innerText)
-    // Open the Stripe checkout element
-    stripeHandler.open({
-        amount: price
+    fetch('/purchase', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            items: getCartItems()
+        })
+    }).then(function (res) {
+        return res.json()
+    }).then(function (data) {
+        stripe.confirmCardPayment(data.secret, {
+            payment_method: { card: card }
+        }).then(function (result) {
+            if (result.error) {
+                // Show error to your customer (e.g., insufficient funds)
+                console.log(result.error.message);
+            } else {
+                // The payment has been processed!
+                if (result.paymentIntent.status === 'succeeded') {
+                    const totalCharges = (result.paymentIntent.amount / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+                    alert(`Successfully charges: ${totalCharges}`);
+
+
+                    // Show a success message to your customer
+                    // There's a risk of the customer closing the window before callback execution
+                    // Set up a webhook or plugin to listen for the payment_intent.succeeded event
+                    // that handles any business critical post-payment actions
+                }
+            }
+        })
     })
 }
 
