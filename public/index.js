@@ -81,12 +81,6 @@ function addToCartClicked(event) {
     var id = shopItem.dataset.itemId
     var type = shopItem.dataset.itemType
     addItemToCart(title, price, imageSrc, id, type)
-    // Send data to segment
-    analytics.track("Added to cart", {
-        category: type,
-        label: title,
-        value: convertToCents(price)
-    });
     updateCartTotal()
 }
 
