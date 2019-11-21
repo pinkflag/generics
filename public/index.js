@@ -71,17 +71,6 @@ const stripeHandler = StripeCheckout.configure({
             // clear cart since the purchase went through
             var cartItems = document.getElementsByClassName('cart-items')[0]
             while (cartItems.hasChildNodes()) {
-                var cartRow = cartItems.firstElementChild
-                var id = cartRow.dataset.itemId;
-                var type = cartRow.dataset.itemType;
-                var title = cartRow.getElementsByClassName('cart-item-title')[0].innerText
-                var price = convertToCents(cartRow.getElementsByClassName('cart-price')[0].innerText)
-                // Send data to segment
-                analytics.track("Purchased", {
-                    category: type,
-                    label: title,
-                    value: price
-                });
                 cartItems.removeChild(cartItems.firstChild)
             }
             updateCartTotal()
@@ -124,12 +113,6 @@ function addToCartClicked(event) {
     var id = shopItem.dataset.itemId
     var type = shopItem.dataset.itemType
     addItemToCart(title, price, imageSrc, id, type)
-    // Send data to segment
-    analytics.track("Added to cart", {
-        category: type,
-        label: title,
-        value: convertToCents(price)
-    });
     updateCartTotal()
 }
 
