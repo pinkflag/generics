@@ -37,7 +37,7 @@ function getCartItems() {
         var id = cartRow.dataset.itemId;
         items.push({
             id: id,
-            quantity: quantity
+            quantity: parseFloat(quantity)
         })
     }
     return items;
